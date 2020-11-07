@@ -1,4 +1,5 @@
 *.7z
+*.mov
 weekly/*.jpg
 monthly/*.jpg
 output/*.mp4
