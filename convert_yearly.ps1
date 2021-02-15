@@ -4,6 +4,9 @@
 $i = 0
 
 Set-Location yearly
+$targetDir = Convert-Path '.' # Get the current (target) directory's full path.
+Get-ChildItem -Path $targetDir -Recurse -Filter "*.jpg" | Move-Item -destination $targetDir
+
 Get-ChildItem *.jpg | %{Rename-Item $_ -NewName ('{0:D5}.jpg' -f $i++)}
 
 ..\ffmpeg.exe -r 30 -f image2 -s 1920x1080 -i %05d.jpg -vcodec libx264 -crf 20 -vf "setpts=(5)*PTS,scale=3840:2160:flags=lanczos" -pix_fmt yuv420p ..\output\yeartmp.mp4
